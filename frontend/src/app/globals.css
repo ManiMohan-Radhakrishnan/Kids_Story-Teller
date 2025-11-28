@@ -1,0 +1,289 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Soft, dreamy design tokens from NextGenRedesign */
+    --background: 40 100% 97%; /* Warm Sunny Background */
+    --foreground: 260 40% 25%; /* Deep Plum for text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 260 40% 25%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 260 40% 25%;
+
+    --primary: 340 90% 65%; /* Bright Coral/Pink */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 160 70% 45%; /* Vibrant Mint */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 260 30% 94%; /* Soft Lavender */
+    --muted-foreground: 260 20% 50%;
+
+    --accent: 200 90% 60%; /* Bright Sky Blue */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 340 30% 90%;
+    --input: 340 30% 90%;
+    --ring: 340 90% 65%;
+
+    --radius: 1.5rem;
+  }
+
+  html {
+    font-family: system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-wide text-foreground/90;
+  }
+}
+
+@layer components {
+  /* Custom scrollbar for better UX */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(168 85 247 / 0.5) transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgb(196 181 253);
+    border-radius: 9999px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(167 139 250);
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+  
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  
+  /* Custom gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent;
+  }
+  
+  /* Custom focus styles */
+  .focus-magical {
+    @apply focus:outline-none focus:ring-4 focus:ring-purple-300 focus:ring-opacity-50;
+  }
+  
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white bg-opacity-20 backdrop-blur-lg border border-white border-opacity-20;
+  }
+
+  /* Soft, dreamy design utilities from NextGenRedesign */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-accent;
+  }
+
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-xl border-2 border-white shadow-[0_8px_30px_rgba(255,100,150,0.1)];
+  }
+
+  .glass-card {
+    @apply bg-white border-2 border-transparent hover:border-primary/20 shadow-sm hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 ease-out;
+  }
+
+  .soft-hover {
+    @apply hover:bg-white hover:shadow-md transition-all duration-300 hover:scale-105;
+  }
+  
+  /* Text shadow for better readability */
+  .text-shadow {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Kid-friendly animations */
+  .bounce-gentle {
+    animation: bounce-gentle 2s infinite;
+  }
+  
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  /* Custom container with max width and centering */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Responsive text sizes */
+  .text-responsive-xl {
+    @apply text-2xl sm:text-3xl lg:text-4xl;
+  }
+  
+  .text-responsive-lg {
+    @apply text-lg sm:text-xl lg:text-2xl;
+  }
+  
+  /* Mobile-first button spacing */
+  .btn-group {
+    @apply flex flex-col sm:flex-row gap-3 sm:gap-4;
+  }
+  
+  /* Card grid responsive */
+  .card-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6;
+  }
+  
+  /* Story content styling */
+  .story-content {
+    @apply prose prose-gray max-w-none prose-headings:text-gray-800 prose-p:text-gray-700 prose-p:leading-relaxed;
+  }
+  
+  /* Mobile-friendly input spacing */
+  .form-group {
+    @apply space-y-4 sm:space-y-6;
+  }
+  
+  /* Safe area for mobile devices */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Touch-friendly minimum sizes */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+}
+
+/* Custom animations */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(20px, -30px) scale(1.05);
+  }
+  66% {
+    transform: translate(-15px, 15px) scale(0.95);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove default button styles */
+button {
+  @apply focus:outline-none;
+}
+
+/* Improved focus visibility for accessibility */
+*:focus-visible {
+  @apply outline-2 outline-purple-500 outline-offset-2;
+}
+
+/* Custom selection color */
+::selection {
+  @apply bg-purple-200 text-purple-900;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-text {
+    @apply text-black;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bg-gradient-to-r {
+    @apply bg-gray-900 text-white;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode support (optional future enhancement) */
+@media (prefers-color-scheme: dark) {
+  /* Uncomment if you want to add dark mode in the future */
+  /*
+  .dark-mode {
+    @apply bg-gray-900 text-white;
+  }
+  */
+}
+
+/* Font loading optimization */
+@font-face {
+  font-display: swap;
+}
+
+/* Mobile landscape optimization */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .mobile-landscape-compact {
+    @apply py-2 text-sm;
+  }
+}
