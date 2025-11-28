@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     app_name: str = Field(default="Kids Storytelling Bot", env="APP_NAME")
     app_version: str = Field(default="1.0.0", env="APP_VERSION")
     debug: bool = Field(default=False, env="DEBUG")
-    host: str = Field(default="0.0.0.0", env="HOST")
+    host: str = Field(default="127.0.0.1", env="HOST")
     port: int = Field(default=9999, env="PORT")
     
     # LLM Provider Configuration
