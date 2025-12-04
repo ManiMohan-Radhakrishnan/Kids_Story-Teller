@@ -1,48 +1,48 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { GraduationCap } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { GraduationCap } from "lucide-react";
 
 interface LoadingSpinnerProps {
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
   message?: string;
-  variant?: 'default' | 'magical' | 'rainbow';
+  variant?: "default" | "magical" | "rainbow";
 }
 
 const sizes = {
-  sm: 'w-8 h-8',
-  md: 'w-12 h-12',
-  lg: 'w-16 h-16',
-  xl: 'w-24 h-24',
+  sm: "w-8 h-8",
+  md: "w-12 h-12",
+  lg: "w-16 h-16",
+  xl: "w-24 h-24",
 };
 
-export function LoadingSpinner({ 
-  size = 'md', 
-  message = 'Creating your magical story...', 
-  variant = 'magical' 
+export function LoadingSpinner({
+  size = "md",
+  message = "Creating your magical story...",
+  variant = "magical",
 }: LoadingSpinnerProps) {
   return (
     <div className="flex flex-col items-center justify-center p-8">
       <div className="relative">
-        {variant === 'magical' && (
+        {variant === "magical" && (
           <>
             {/* Outer ring */}
             <motion.div
               className={`${sizes[size]} border-4 border-purple-200 rounded-full`}
               animate={{ rotate: 360 }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
             />
             {/* Inner spinning element */}
             <motion.div
               className={`absolute inset-2 bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-500 rounded-full`}
-              animate={{ 
+              animate={{
                 rotate: -360,
                 scale: [1, 1.1, 1],
               }}
-              transition={{ 
-                rotate: { duration: 2, repeat: Infinity, ease: 'linear' },
-                scale: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' }
+              transition={{
+                rotate: { duration: 2, repeat: Infinity, ease: "linear" },
+                scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" },
               }}
             />
             {/* Center dot */}
@@ -50,33 +50,33 @@ export function LoadingSpinner({
           </>
         )}
 
-        {variant === 'rainbow' && (
+        {variant === "rainbow" && (
           <div className="relative">
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
                 className={`absolute ${sizes[size]} border-4 rounded-full`}
                 style={{
-                  borderColor: ['#ef4444', '#f97316', '#eab308'][i],
-                  borderTopColor: 'transparent',
+                  borderColor: ["#ef4444", "#f97316", "#eab308"][i],
+                  borderTopColor: "transparent",
                 }}
                 animate={{ rotate: 360 }}
-                transition={{ 
-                  duration: 1.5 + i * 0.2, 
-                  repeat: Infinity, 
-                  ease: 'linear',
-                  delay: i * 0.1
+                transition={{
+                  duration: 1.5 + i * 0.2,
+                  repeat: Infinity,
+                  ease: "linear",
+                  delay: i * 0.1,
                 }}
               />
             ))}
           </div>
         )}
 
-        {variant === 'default' && (
+        {variant === "default" && (
           <motion.div
             className={`${sizes[size]} border-4 border-blue-200 border-t-blue-500 rounded-full`}
             animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           />
         )}
       </div>
@@ -99,14 +99,14 @@ export function LoadingSpinner({
               <motion.div
                 key={i}
                 className="w-2 h-2 bg-purple-400 rounded-full"
-                animate={{ 
+                animate={{
                   scale: [1, 1.5, 1],
-                  opacity: [0.5, 1, 0.5] 
+                  opacity: [0.5, 1, 0.5],
                 }}
-                transition={{ 
-                  duration: 1.5, 
-                  repeat: Infinity, 
-                  delay: i * 0.2 
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  delay: i * 0.2,
                 }}
               />
             ))}
@@ -141,7 +141,7 @@ export function StoryGeneratingLoader() {
       <motion.div
         className="relative w-20 h-20 mb-6"
         animate={{ rotate: 360 }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
       >
         {/* Book icon animation */}
         <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-500 rounded-lg transform rotate-12" />
@@ -151,7 +151,7 @@ export function StoryGeneratingLoader() {
           <div className="h-1 bg-gray-300 rounded w-3/4" />
           <div className="h-1 bg-gray-300 rounded w-1/2" />
         </div>
-        
+
         {/* Floating sparkles */}
         {[0, 1, 2, 3].map((i) => (
           <motion.div
@@ -161,16 +161,16 @@ export function StoryGeneratingLoader() {
               left: `${20 + i * 15}%`,
               top: `${10 + i * 20}%`,
             }}
-            animate={{ 
+            animate={{
               y: [-10, -20, -10],
               opacity: [0, 1, 0],
               scale: [0, 1, 0],
             }}
-            transition={{ 
-              duration: 2, 
-              repeat: Infinity, 
+            transition={{
+              duration: 2,
+              repeat: Infinity,
               delay: i * 0.3,
-              ease: 'easeInOut'
+              ease: "easeInOut",
             }}
           />
         ))}
@@ -214,14 +214,14 @@ export function TutorThinkingLoader() {
       <motion.div
         className="relative w-20 h-20 mb-6"
         animate={{ rotate: 360 }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
       >
         {/* Professional graduation cap icon animation */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-green-500 rounded-full" />
         <div className="absolute inset-2 bg-white rounded-full flex items-center justify-center">
           <GraduationCap className="w-8 h-8 text-blue-600" />
         </div>
-        
+
         {/* Floating question marks */}
         {[0, 1, 2].map((i) => (
           <motion.div
@@ -231,16 +231,16 @@ export function TutorThinkingLoader() {
               left: `${15 + i * 25}%`,
               top: `${5 + i * 15}%`,
             }}
-            animate={{ 
+            animate={{
               y: [-8, -16, -8],
               opacity: [0, 1, 0],
               scale: [0.8, 1.2, 0.8],
             }}
-            transition={{ 
-              duration: 1.8, 
-              repeat: Infinity, 
+            transition={{
+              duration: 1.8,
+              repeat: Infinity,
               delay: i * 0.4,
-              ease: 'easeInOut'
+              ease: "easeInOut",
             }}
           >
             ?

@@ -1,26 +1,28 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Sparkles, User, Settings, Wand2, Feather, Loader2 } from 'lucide-react';
-import { useStory } from '@/contexts/StoryContext';
-import { Button } from '@/components/ui/Button';
-import { MagicalTextArea, MagicalInput } from '@/components/ui/Input';
-import { MagicalSelect } from '@/components/ui/Select';
-import { StoryGeneratingLoader } from '@/components/ui/LoadingSpinner';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import {
+  Sparkles,
+  User,
+  Settings,
+  Wand2,
+  Feather,
+  Loader2,
+} from "lucide-react";
+import { useStory } from "@/contexts/StoryContext";
+import { Button } from "@/components/ui/Button";
+import { MagicalTextArea, MagicalInput } from "@/components/ui/Input";
+import { MagicalSelect } from "@/components/ui/Select";
+import { StoryGeneratingLoader } from "@/components/ui/LoadingSpinner";
 
 export function StoryCreator() {
-  const {
-    state,
-    setConfig,
-    startStory,
-    loadFilters,
-    clearError
-  } = useStory();
+  const { state, setConfig, startStory, loadFilters, clearError } = useStory();
 
-  const [prompt, setPrompt] = useState('');
-  const [characterName, setCharacterName] = useState('');
-  const [promptError, setPromptError] = useState('');
+  const [prompt, setPrompt] = useState("");
+  const [characterName, setCharacterName] = useState("");
+  const [promptError, setPromptError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Load filters on component mount
   useEffect(() => {
@@ -29,17 +31,18 @@ export function StoryCreator() {
 
   const handleStartStory = async () => {
     // Validate prompt
+    setIsLoading(true);
     if (!prompt.trim()) {
-      setPromptError('Please tell us what kind of story you\'d like to hear!');
+      setPromptError("Please tell us what kind of story you'd like to hear!");
       return;
     }
 
     if (prompt.trim().length < 10) {
-      setPromptError('Please give us a bit more detail about your story idea!');
+      setPromptError("Please give us a bit more detail about your story idea!");
       return;
     }
 
-    setPromptError('');
+    setPromptError("");
     clearError();
 
     // Update config with character name
@@ -48,72 +51,73 @@ export function StoryCreator() {
     }
 
     await startStory(prompt.trim());
+    setIsLoading(false);
   };
 
   const filterOptions = [
     {
-      value: 'educational',
-      label: 'Educational Stories',
-      emoji: '',
-      description: 'Learn while having fun with educational content'
+      value: "educational",
+      label: "Educational Stories",
+      emoji: "",
+      description: "Learn while having fun with educational content",
     },
     {
-      value: 'moral_values',
-      label: 'Value-Based Stories',
-      emoji: '',
-      description: 'Stories that teach positive values and character'
+      value: "moral_values",
+      label: "Value-Based Stories",
+      emoji: "",
+      description: "Stories that teach positive values and character",
     },
     {
-      value: 'fun_only',
-      label: 'Entertainment Stories',
-      emoji: '',
-      description: 'Engaging adventures focused on entertainment'
-    }
+      value: "fun_only",
+      label: "Entertainment Stories",
+      emoji: "",
+      description: "Engaging adventures focused on entertainment",
+    },
   ];
 
   const ageOptions = [
     {
-      value: '3-5',
-      label: 'Ages 3-5 years',
-      emoji: '',
-      description: 'Simple vocabulary and basic concepts'
+      value: "3-5",
+      label: "Ages 3-5 years",
+      emoji: "",
+      description: "Simple vocabulary and basic concepts",
     },
     {
-      value: '6-8',
-      label: 'Ages 6-8 years',
-      emoji: '',
-      description: 'Engaging stories with educational elements'
+      value: "6-8",
+      label: "Ages 6-8 years",
+      emoji: "",
+      description: "Engaging stories with educational elements",
     },
     {
-      value: '9-12',
-      label: 'Ages 9-12 years',
-      emoji: '',
-      description: 'Complex narratives with deeper themes'
-    }
+      value: "9-12",
+      label: "Ages 9-12 years",
+      emoji: "",
+      description: "Complex narratives with deeper themes",
+    },
   ];
 
   const lengthOptions = [
     {
-      value: 'short',
-      label: 'Short Story',
-      emoji: '',
-      description: 'Perfect for a quick story session'
+      value: "short",
+      label: "Short Story",
+      emoji: "",
+      description: "Perfect for a quick story session",
     },
     {
-      value: 'medium',
-      label: 'Medium Story',
-      emoji: '',
-      description: 'Balanced length for storytelling'
+      value: "medium",
+      label: "Medium Story",
+      emoji: "",
+      description: "Balanced length for storytelling",
     },
     {
-      value: 'long',
-      label: 'Long Story',
-      emoji: '',
-      description: 'Extended narrative for deeper engagement'
-    }
+      value: "long",
+      label: "Long Story",
+      emoji: "",
+      description: "Extended narrative for deeper engagement",
+    },
   ];
 
-  if (state.isGenerating) {
+  if (isLoading || state.isGenerating) {
     return (
       <div className="max-w-2xl mx-auto">
         <StoryGeneratingLoader />
@@ -143,7 +147,13 @@ export function StoryCreator() {
           animate={{ opacity: 1, x: 0 }}
           className="lg:col-span-8"
         >
-          <form onSubmit={(e) => { e.preventDefault(); handleStartStory(); }} className="space-y-6">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleStartStory();
+            }}
+            className="space-y-6"
+          >
             <div className="bg-white/70 backdrop-blur-sm p-8 rounded-[2rem] space-y-8 shadow-sm border border-white">
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-2xl font-heading font-bold text-foreground/80">
@@ -180,15 +190,15 @@ export function StoryCreator() {
             <Button
               type="submit"
               size="xl"
-              disabled={!prompt.trim() || state.isGenerating}
+              disabled={!prompt.trim() || state.isGenerating || isLoading}
               className="w-full shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:bg-primary/90 transition-all transform hover:-translate-y-0.5"
             >
-              {state.isGenerating ? (
+              {isLoading ? (
                 <Loader2 className="mr-2 w-6 h-6 animate-spin" />
               ) : (
                 <Wand2 className="mr-2 w-6 h-6" />
               )}
-              {state.isGenerating ? 'Weaving Your Story...' : 'Weave My Story'}
+              {isLoading ? "Weaving Your Story..." : "Weave My Story"}
             </Button>
           </form>
         </motion.div>
@@ -209,21 +219,32 @@ export function StoryCreator() {
             <MagicalSelect
               label="Story Type"
               value={state.contentFilter}
-              onChange={(value) => setConfig({ contentFilter: value as 'moral_values' | 'educational' | 'fun_only' })}
+              onChange={(value) =>
+                setConfig({
+                  contentFilter: value as
+                    | "moral_values"
+                    | "educational"
+                    | "fun_only",
+                })
+              }
               options={filterOptions}
             />
 
             <MagicalSelect
               label="Age Group"
               value={state.ageGroup}
-              onChange={(value) => setConfig({ ageGroup: value as '3-5' | '6-8' | '9-12' })}
+              onChange={(value) =>
+                setConfig({ ageGroup: value as "3-5" | "6-8" | "9-12" })
+              }
               options={ageOptions}
             />
 
             <MagicalSelect
               label="Story Length"
               value={state.storyLength}
-              onChange={(value) => setConfig({ storyLength: value as 'short' | 'medium' | 'long' })}
+              onChange={(value) =>
+                setConfig({ storyLength: value as "short" | "medium" | "long" })
+              }
               options={lengthOptions}
             />
           </div>
@@ -236,18 +257,25 @@ export function StoryCreator() {
             transition={{ delay: 0.5 }}
           >
             <p className="text-sm text-gray-700">
-              <span className="font-semibold">💡 Did you know?</span> We'll create a{' '}
+              <span className="font-semibold">💡 Did you know?</span> We'll
+              create a{" "}
               <span className="font-medium text-purple-700">
-                {lengthOptions.find(l => l.value === state.storyLength)?.label.toLowerCase()}
-              </span>{' '}
-              perfect for{' '}
+                {lengthOptions
+                  .find((l) => l.value === state.storyLength)
+                  ?.label.toLowerCase()}
+              </span>{" "}
+              perfect for{" "}
               <span className="font-medium text-purple-700">
-                {ageOptions.find(a => a.value === state.ageGroup)?.label.toLowerCase()}
-              </span>{' '}
-              with a{' '}
+                {ageOptions
+                  .find((a) => a.value === state.ageGroup)
+                  ?.label.toLowerCase()}
+              </span>{" "}
+              with a{" "}
               <span className="font-medium text-purple-700">
-                {filterOptions.find(f => f.value === state.contentFilter)?.label.toLowerCase()}
-              </span>{' '}
+                {filterOptions
+                  .find((f) => f.value === state.contentFilter)
+                  ?.label.toLowerCase()}
+              </span>{" "}
               theme!
             </p>
           </motion.div>
@@ -272,16 +300,10 @@ export function StoryCreator() {
                 <h3 className="text-sm font-medium text-red-800">
                   Oops! Something went wrong
                 </h3>
-                <div className="mt-2 text-sm text-red-700">
-                  {state.error}
-                </div>
+                <div className="mt-2 text-sm text-red-700">{state.error}</div>
               </div>
               <div className="ml-auto">
-                <Button
-                  onClick={clearError}
-                  size="sm"
-                  variant="secondary"
-                >
+                <Button onClick={clearError} size="sm" variant="secondary">
                   Try Again
                 </Button>
               </div>
@@ -298,8 +320,12 @@ export function StoryCreator() {
         transition={{ duration: 0.6, delay: 0.4 }}
       >
         <div className="text-center mb-6">
-          <h3 className="text-xl font-bold text-gray-800 mb-2">Need Some Ideas?</h3>
-          <p className="text-gray-600">Here are some fun story ideas to get you started!</p>
+          <h3 className="text-xl font-bold text-gray-800 mb-2">
+            Need Some Ideas?
+          </h3>
+          <p className="text-gray-600">
+            Here are some fun story ideas to get you started!
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -309,7 +335,7 @@ export function StoryCreator() {
             "A space adventure with talking planets",
             "An underwater city made of coral and pearls",
             "A time-traveling treehouse",
-            "A superhero who saves the day with kindness"
+            "A superhero who saves the day with kindness",
           ].map((idea, index) => (
             <motion.button
               key={index}

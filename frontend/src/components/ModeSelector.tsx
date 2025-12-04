@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { BookOpen, GraduationCap } from 'lucide-react';
-import { useStory } from '@/contexts/StoryContext';
-import { SessionMode } from '@/types/story';
+import React from "react";
+import { motion } from "framer-motion";
+import { BookOpen, GraduationCap } from "lucide-react";
+import { useStory } from "@/contexts/StoryContext";
+import { SessionMode } from "@/types/story";
 
 export function ModeSelector() {
   const { state, setMode, hasActiveSession, resetSession } = useStory();
@@ -19,22 +19,22 @@ export function ModeSelector() {
 
   const modes = [
     {
-      id: 'story' as SessionMode,
-      name: 'Story Mode',
+      id: "story" as SessionMode,
+      name: "Story Mode",
       icon: BookOpen,
-      description: 'Create engaging stories and adventures',
-      gradient: 'from-purple-500 to-pink-500',
-      bgGradient: 'from-purple-50 to-pink-50',
-      borderColor: 'border-purple-300',
+      description: "Create engaging stories and adventures",
+      gradient: "from-purple-500 to-pink-500",
+      bgGradient: "from-purple-50 to-pink-50",
+      borderColor: "border-purple-300",
     },
     {
-      id: 'tutor' as SessionMode,
-      name: 'Tutor Mode',
+      id: "tutor" as SessionMode,
+      name: "Tutor Mode",
       icon: GraduationCap,
-      description: 'Ask questions and learn about any topic',
-      gradient: 'from-blue-500 to-green-500',
-      bgGradient: 'from-blue-50 to-green-50',
-      borderColor: 'border-blue-300',
+      description: "Ask questions and learn about any topic",
+      gradient: "from-blue-500 to-green-500",
+      bgGradient: "from-blue-50 to-green-50",
+      borderColor: "border-blue-300",
     },
   ];
 
@@ -46,11 +46,12 @@ export function ModeSelector() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-6 p-4 bg-yellow-50 border-2 border-yellow-200 rounded-xl"
         >
-            <div className="flex items-center justify-center">
-              <span className="text-yellow-600 text-sm font-medium">
-                Note: Switching modes will end your current session. Your progress will be lost.
-              </span>
-            </div>
+          <div className="flex items-center justify-center">
+            <span className="text-yellow-600 text-sm font-medium">
+              Note: Switching modes will end your current session. Your progress
+              will be lost.
+            </span>
+          </div>
         </motion.div>
       )}
 
@@ -65,9 +66,10 @@ export function ModeSelector() {
               onClick={() => handleModeChange(mode.id)}
               className={`
                 relative p-6 rounded-2xl border-2 transition-all duration-300
-                ${isActive 
-                  ? `bg-gradient-to-br ${mode.bgGradient} ${mode.borderColor} ring-4 ring-opacity-30 ring-purple-300` 
-                  : 'bg-white border-gray-200 hover:border-gray-300'
+                ${
+                  isActive
+                    ? `bg-gradient-to-br ${mode.bgGradient} ${mode.borderColor} ring-4 ring-opacity-30 ring-purple-300`
+                    : "bg-white border-gray-200 hover:border-gray-300"
                 }
               `}
               whileHover={{ scale: 1.02 }}
@@ -82,7 +84,7 @@ export function ModeSelector() {
                   className="absolute top-3 right-3"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
                   <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                     <span className="text-white text-sm">✓</span>
@@ -93,38 +95,50 @@ export function ModeSelector() {
               {/* Icon and content */}
               <div className="flex flex-col items-center text-center space-y-4">
                 {/* Professional icon */}
-                <div className={`
+                <div
+                  className={`
                   w-16 h-16 rounded-full flex items-center justify-center
-                  ${isActive 
-                    ? `bg-gradient-to-r ${mode.gradient} shadow-lg` 
-                    : 'bg-gray-100'
+                  ${
+                    isActive
+                      ? `bg-gradient-to-r ${mode.gradient} shadow-lg`
+                      : "bg-gray-100"
                   }
-                `}>
-                  <Icon className={`w-8 h-8 ${isActive ? 'text-white' : 'text-gray-600'}`} />
+                `}
+                >
+                  <Icon
+                    className={`w-8 h-8 ${
+                      isActive ? "text-white" : "text-gray-600"
+                    }`}
+                  />
                 </div>
 
                 {/* Mode name */}
-                <h3 className={`
+                <h3
+                  className={`
                   text-xl font-bold
-                  ${isActive 
-                    ? `bg-gradient-to-r ${mode.gradient} bg-clip-text text-transparent` 
-                    : 'text-gray-700'
+                  ${
+                    isActive
+                      ? `bg-gradient-to-r ${mode.gradient} bg-clip-text text-transparent`
+                      : "text-gray-700"
                   }
-                `}>
+                `}
+                >
                   {mode.name}
                 </h3>
 
                 {/* Description */}
-                <p className={`
+                <p
+                  className={`
                   text-sm leading-relaxed
-                  ${isActive ? 'text-gray-700' : 'text-gray-500'}
-                `}>
+                  ${isActive ? "text-gray-700" : "text-gray-500"}
+                `}
+                >
                   {mode.description}
                 </p>
 
                 {/* Features list */}
                 <div className="space-y-1">
-                  {mode.id === 'story' ? (
+                  {mode.id === "story" ? (
                     <div className="text-xs text-gray-600 space-y-1">
                       <div>• Interactive storytelling</div>
                       <div>• Character creation</div>
@@ -169,7 +183,7 @@ export function ModeSelector() {
         <h4 className="text-lg font-bold text-gray-800 mb-4 text-center">
           What&apos;s the difference?
         </h4>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <h5 className="font-semibold text-purple-700 flex items-center">
@@ -183,7 +197,7 @@ export function ModeSelector() {
               <li>• Perfect for bedtime stories</li>
             </ul>
           </div>
-          
+
           <div className="space-y-2">
             <h5 className="font-semibold text-blue-700 flex items-center">
               <GraduationCap className="w-4 h-4 mr-2" />
